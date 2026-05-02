@@ -1,0 +1,16 @@
+{
+  "scenario_id": "cells-spreadsheet-converter",
+  "package_id": "Aspose.Cells",
+  "package_version": "26.4.0",
+  "target_framework": "net8.0",
+  "claimed_symbols": [
+    "Aspose.Cells.LowCode.SpreadsheetConverter",
+    "Aspose.Cells.LowCode.SpreadsheetConverter.Process",
+    "Aspose.Cells.LowCode.SpreadsheetConverter.Process"
+  ],
+  "status": "generated",
+  "input_strategy": "generated_fixture_file",
+  "input_files": [
+    "input.xlsx"
+  ]
+}

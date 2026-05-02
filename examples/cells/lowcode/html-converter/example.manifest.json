@@ -1,0 +1,16 @@
+{
+  "scenario_id": "cells-html-converter",
+  "package_id": "Aspose.Cells",
+  "package_version": "26.4.0",
+  "target_framework": "net8.0",
+  "claimed_symbols": [
+    "Aspose.Cells.LowCode.HtmlConverter",
+    "Aspose.Cells.LowCode.HtmlConverter.Process",
+    "Aspose.Cells.LowCode.HtmlConverter.Process"
+  ],
+  "status": "generated",
+  "input_strategy": "generated_fixture_file",
+  "input_files": [
+    "input.xlsx"
+  ]
+}
