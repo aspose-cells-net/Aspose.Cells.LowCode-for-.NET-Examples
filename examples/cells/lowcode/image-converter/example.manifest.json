@@ -1,0 +1,17 @@
+{
+  "scenario_id": "cells-image-converter",
+  "package_id": "Aspose.Cells",
+  "package_version": "26.4.0",
+  "target_framework": "net8.0",
+  "claimed_symbols": [
+    "Aspose.Cells.LowCode.ImageConverter",
+    "Aspose.Cells.LowCode.ImageConverter.Process",
+    "Aspose.Cells.LowCode.ImageConverter.Process",
+    "Aspose.Cells.LowCode.ImageConverter.Process"
+  ],
+  "status": "generated",
+  "input_strategy": "generated_fixture_file",
+  "input_files": [
+    "input.xlsx"
+  ]
+}
