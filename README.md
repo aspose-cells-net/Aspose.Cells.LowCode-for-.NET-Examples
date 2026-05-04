@@ -91,7 +91,7 @@ These examples are validated by the pipeline before publishing:
 | Example reviewer gate | PASS |
 | Gate verdict | `PR_DRY_RUN_READY` |
 
-Generated on: 2026-05-04 06:08 UTC
+Generated on: 2026-05-04 09:23 UTC
 
 ---
 
@@ -122,12 +122,13 @@ Aspose.Cells.LowCode-for-.NET-Examples/
 ## Useful Links
 
 - **NuGet Package:** [Aspose.Cells](https://www.nuget.org/packages/Aspose.Cells)
-- **Product Page:** [Aspose.Cells for .NET](https://products.aspose.com/cells/net)
-- **Documentation:** [Aspose.Cells for .NET Docs](https://docs.aspose.com/cells/net)
-- **API Reference:** [Aspose.Cells for .NET API Reference](https://reference.aspose.com/cells/net)
-- **Blog:** [Aspose Blog — Cells](https://blog.aspose.com/category/cells)
-- **Support Forum:** [Aspose Support](https://forum.aspose.com/c/cells)
-- **Temporary License:** [Get a Free Temporary License](https://purchase.aspose.com/temporary-license)
+- **Product Page:** [Aspose.Cells for .NET](https://products.aspose.net/cells)
+- **Documentation:** [Aspose.Cells for .NET Docs](https://docs.aspose.net/cells)
+- **API Reference:** [Aspose.Cells for .NET API Reference](https://reference.aspose.net/cells)
+- **Knowledge Base:** [Aspose.Cells for .NET KB](https://kb.aspose.net/cells)
+- **Blog:** [Aspose Blog — Cells](https://blog.aspose.net/categories/aspose.cells-plugin-family/)
+- **Support Forum:** [Aspose Support](https://forum.aspose.net/c/cells/)
+- **Temporary License:** [Get a Free Temporary License](https://purchase.aspose.net/temporary-license)
 
 ---
 
@@ -136,6 +137,6 @@ Aspose.Cells.LowCode-for-.NET-Examples/
 This repository is licensed under the [MIT License](LICENSE).
 
 The `Aspose.Cells` NuGet package requires a valid Aspose commercial license or a
-[free temporary license](https://purchase.aspose.com/temporary-license) for development use.
+[free temporary license](https://purchase.aspose.net/temporary-license) for development use.
 
-For licensing questions, contact [Aspose Sales](https://about.aspose.com/contact-us/).
+For licensing questions, contact [Aspose Sales](https://about.aspose.net/contact/).
