@@ -22,15 +22,15 @@ here as a repeatable reference.
 
 | Example | Demonstrated API | Input | Output | Run |
 |---------|-----------------|-------|--------|-----|
-| `html-converter` | `HtmlConverter` | `xlsx` | `html` | `dotnet run --project examples/cells/lowcode/html-converter` |
-| `image-converter` | `ImageConverter` | `xlsx` | `png` | `dotnet run --project examples/cells/lowcode/image-converter` |
-| `json-converter` | `JsonConverter` | `xlsx` | `json` | `dotnet run --project examples/cells/lowcode/json-converter` |
-| `pdf-converter` | `PdfConverter` | `xlsx` | `pdf` | `dotnet run --project examples/cells/lowcode/pdf-converter` |
-| `spreadsheet-converter` | `SpreadsheetConverter` | `xlsx` | `xlsx` | `dotnet run --project examples/cells/lowcode/spreadsheet-converter` |
-| `spreadsheet-locker` | `SpreadsheetLocker` | `xlsx` | `xlsx` | `dotnet run --project examples/cells/lowcode/spreadsheet-locker` |
-| `spreadsheet-merger` | `SpreadsheetMerger` | `2x xlsx` | `xlsx` | `dotnet run --project examples/cells/lowcode/spreadsheet-merger` |
-| `spreadsheet-splitter` | `SpreadsheetSplitter` | `xlsx` | `xlsx` | `dotnet run --project examples/cells/lowcode/spreadsheet-splitter` |
-| `text-converter` | `TextConverter` | `xlsx` | `txt` | `dotnet run --project examples/cells/lowcode/text-converter` |
+| `html-converter` | `HtmlConverter.Process` | `xlsx` | `html` | `dotnet run --project examples/cells/lowcode/html-converter` |
+| `image-converter` | `ImageConverter.Process` | `xlsx` | `png` | `dotnet run --project examples/cells/lowcode/image-converter` |
+| `json-converter` | `JsonConverter.Process` | `xlsx` | `json` | `dotnet run --project examples/cells/lowcode/json-converter` |
+| `pdf-converter` | `PdfConverter.Process` | `xlsx` | `pdf` | `dotnet run --project examples/cells/lowcode/pdf-converter` |
+| `spreadsheet-converter` | `SpreadsheetConverter.Process` | `xlsx` | `xlsx` | `dotnet run --project examples/cells/lowcode/spreadsheet-converter` |
+| `spreadsheet-locker` | `SpreadsheetLocker.Process` | `xlsx` | `xlsx` | `dotnet run --project examples/cells/lowcode/spreadsheet-locker` |
+| `spreadsheet-merger` | `SpreadsheetMerger.Process` | `2x xlsx` | `xlsx` | `dotnet run --project examples/cells/lowcode/spreadsheet-merger` |
+| `spreadsheet-splitter` | `SpreadsheetSplitter.Process` | `xlsx` | `xlsx` | `dotnet run --project examples/cells/lowcode/spreadsheet-splitter` |
+| `text-converter` | `TextConverter.Process` | `xlsx` | `txt` | `dotnet run --project examples/cells/lowcode/text-converter` |
 
 
 ---
@@ -91,7 +91,7 @@ These examples are validated by the pipeline before publishing:
 | Example reviewer gate | PASS |
 | Gate verdict | `PR_DRY_RUN_READY` |
 
-Generated on: 2026-05-04 09:23 UTC
+Generated on: 2026-05-05 06:38 UTC
 
 ---
 
