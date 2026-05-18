@@ -28,9 +28,380 @@ here as a repeatable reference.
 | `pdf-converter` | `PdfConverter.Process` | `xlsx` | `pdf` | `dotnet run --project examples/cells/lowcode/pdf-converter` |
 | `spreadsheet-converter` | `SpreadsheetConverter.Process` | `xlsx` | `xlsx` | `dotnet run --project examples/cells/lowcode/spreadsheet-converter` |
 | `spreadsheet-locker` | `SpreadsheetLocker.Process` | `xlsx` | `xlsx` | `dotnet run --project examples/cells/lowcode/spreadsheet-locker` |
-| `spreadsheet-merger` | `SpreadsheetMerger.Process` | `2x xlsx` | `xlsx` | `dotnet run --project examples/cells/lowcode/spreadsheet-merger` |
+| `spreadsheet-merger` | `SpreadsheetMerger.Process` | `xlsx` | `xlsx` | `dotnet run --project examples/cells/lowcode/spreadsheet-merger` |
 | `spreadsheet-splitter` | `SpreadsheetSplitter.Process` | `xlsx` | `xlsx` | `dotnet run --project examples/cells/lowcode/spreadsheet-splitter` |
-| `text-converter` | `TextConverter.Process` | `xlsx` | `txt` | `dotnet run --project examples/cells/lowcode/text-converter` |
+| `text-converter` | `TextConverter.Process` | `csv` | `txt` | `dotnet run --project examples/cells/lowcode/text-converter` |
+
+
+
+
+---
+
+## Source Code
+
+
+
+<details>
+<summary><code>html-converter/Program.cs</code></summary>
+
+```csharp
+using System;
+using System.IO;
+using Aspose.Cells.LowCode;
+
+string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
+if (!File.Exists(inputPath))
+    throw new FileNotFoundException("Input file not found", inputPath);
+
+string outputPath = Path.Combine(AppContext.BaseDirectory, "output.html");
+
+// Convert Excel to HTML using the simplest overload
+HtmlConverter.Process(inputPath, outputPath);
+
+// Validate output
+if (File.Exists(outputPath))
+{
+    var info = new FileInfo(outputPath);
+    Console.WriteLine($"Conversion succeeded. Output: {outputPath} ({info.Length} bytes)");
+}
+else
+{
+    throw new InvalidOperationException("Output file was not created");
+}
+```
+
+</details>
+
+
+
+
+<details>
+<summary><code>image-converter/Program.cs</code></summary>
+
+```csharp
+using System;
+using System.IO;
+using Aspose.Cells.LowCode;
+
+class Program
+{
+    static void Main()
+    {
+        // Locate input file from project output directory
+        string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
+        if (!File.Exists(inputPath))
+            throw new FileNotFoundException("Input file not found", inputPath);
+
+        // Define output path
+        string outputPath = Path.Combine(AppContext.BaseDirectory, "output.png");
+
+        // Convert the workbook to an image
+        ImageConverter.Process(inputPath, outputPath);
+
+        // Validate output
+        if (File.Exists(outputPath))
+            Console.WriteLine($"Done. Output: {outputPath} ({new FileInfo(outputPath).Length} bytes)");
+        else
+            throw new InvalidOperationException("Output file was not created");
+    }
+}
+```
+
+</details>
+
+
+
+
+<details>
+<summary><code>json-converter/Program.cs</code></summary>
+
+```csharp
+using System;
+using System.IO;
+using Aspose.Cells.LowCode;
+
+namespace JsonConverterDemo
+{
+    internal class Program
+    {
+        private static void Main(string[] args)
+        {
+            // Locate input Excel file
+            string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
+            if (!File.Exists(inputPath))
+                throw new FileNotFoundException("Input file not found.", inputPath);
+
+            // Define output JSON file
+            string outputPath = Path.Combine(AppContext.BaseDirectory, "output.json");
+
+            // Perform conversion using the simplest overload
+            JsonConverter.Process(inputPath, outputPath);
+
+            // Validate output
+            if (!File.Exists(outputPath))
+                throw new InvalidOperationException("Output file was not created.");
+
+            // Deterministic success output
+            FileInfo info = new FileInfo(outputPath);
+            Console.WriteLine($"Conversion succeeded. Output: {outputPath} ({info.Length} bytes)");
+        }
+    }
+}
+```
+
+</details>
+
+
+
+
+<details>
+<summary><code>pdf-converter/Program.cs</code></summary>
+
+```csharp
+using System;
+using System.IO;
+using Aspose.Cells.LowCode;
+
+class Program
+{
+    static void Main()
+    {
+        // Locate input file from the application base directory
+        string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
+        if (!File.Exists(inputPath))
+            throw new FileNotFoundException("Input file not found", inputPath);
+
+        // Define output PDF path
+        string outputPath = Path.Combine(AppContext.BaseDirectory, "output.pdf");
+
+        // Convert the Excel file to PDF using the simplest overload
+        PdfConverter.Process(inputPath, outputPath);
+
+        // Verify that the output file was created
+        if (File.Exists(outputPath))
+            Console.WriteLine($"Done. Output: {outputPath} ({new FileInfo(outputPath).Length} bytes)");
+        else
+            throw new InvalidOperationException("Output file was not created");
+    }
+}
+```
+
+</details>
+
+
+
+
+<details>
+<summary><code>spreadsheet-converter/Program.cs</code></summary>
+
+```csharp
+using System;
+using System.IO;
+using Aspose.Cells.LowCode;
+
+string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
+if (!File.Exists(inputPath))
+    throw new FileNotFoundException("Input fixture not found", inputPath);
+
+string outputPath = Path.Combine(AppContext.BaseDirectory, "output.xlsx");
+
+// Remove any previous output to ensure deterministic behavior
+if (File.Exists(outputPath))
+    File.Delete(outputPath);
+
+// Call the simplest overload of SpreadsheetConverter.Process
+SpreadsheetConverter.Process(inputPath, outputPath);
+
+// Verify that the output file was created
+if (File.Exists(outputPath))
+{
+    var info = new FileInfo(outputPath);
+    Console.WriteLine($"Done. Output: {outputPath} ({info.Length} bytes)");
+}
+else
+{
+    throw new InvalidOperationException("Output file was not created");
+}
+```
+
+</details>
+
+
+
+
+<details>
+<summary><code>spreadsheet-locker/Program.cs</code></summary>
+
+```csharp
+using System;
+using System.IO;
+using Aspose.Cells.LowCode;
+
+class Program
+{
+    static void Main()
+    {
+        // Locate input file from the project output directory
+        string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
+        if (!File.Exists(inputPath))
+            throw new FileNotFoundException("Input fixture not found", inputPath);
+
+        // Define output path
+        string outputPath = Path.Combine(AppContext.BaseDirectory, "output.xlsx");
+
+        // Call the simplest overload of SpreadsheetLocker.Process
+        SpreadsheetLocker.Process(inputPath, outputPath, "", "");
+
+        // Validate output
+        if (File.Exists(outputPath))
+        {
+            var info = new FileInfo(outputPath);
+            Console.WriteLine($"Done. Output: {outputPath} ({info.Length} bytes)");
+        }
+        else
+        {
+            throw new InvalidOperationException("Output file was not created");
+        }
+    }
+}
+```
+
+</details>
+
+
+
+
+<details>
+<summary><code>spreadsheet-merger/Program.cs</code></summary>
+
+```csharp
+using System;
+using System.IO;
+using Aspose.Cells;
+using Aspose.Cells.LowCode;
+
+class Program
+{
+    static void Main()
+    {
+        // Prepare a simple input workbook if it does not already exist
+        string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
+        if (!File.Exists(inputPath))
+        {
+            var workbook = new Workbook();
+            workbook.Worksheets[0].Name = "Sheet1";
+            workbook.Save(inputPath);
+        }
+
+        // Validate input file exists
+        if (!File.Exists(inputPath))
+            throw new FileNotFoundException("Input file not found.", inputPath);
+
+        // Define output file path
+        string outputPath = Path.Combine(AppContext.BaseDirectory, "output.xlsx");
+
+        // Use the overload of SpreadsheetMerger.Process that accepts an array of template files
+        SpreadsheetMerger.Process(new[] { inputPath }, outputPath);
+
+        // Validate output file was created
+        if (!File.Exists(outputPath))
+            throw new InvalidOperationException("Output file was not created by SpreadsheetMerger.Process.");
+
+        // Deterministic success output
+        Console.WriteLine($"SpreadsheetMerger.Process succeeded: {outputPath} ({new FileInfo(outputPath).Length} bytes)");
+    }
+}
+```
+
+</details>
+
+
+
+
+<details>
+<summary><code>spreadsheet-splitter/Program.cs</code></summary>
+
+```csharp
+using System;
+using System.IO;
+using Aspose.Cells.LowCode;
+
+class Program
+{
+    static void Main()
+    {
+        // Locate input file from project output directory
+        string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
+        if (!File.Exists(inputPath))
+            throw new FileNotFoundException("Input fixture not found", inputPath);
+
+        // Define output path
+        string outputPath = Path.Combine(AppContext.BaseDirectory, "output.xlsx");
+        if (File.Exists(outputPath))
+            File.Delete(outputPath);
+
+        // Call the plugin API (simplest string-path overload)
+        SpreadsheetSplitter.Process(inputPath, outputPath);
+
+        // Validate output
+        if (File.Exists(outputPath))
+        {
+            long size = new FileInfo(outputPath).Length;
+            Console.WriteLine($"Done. Output: {outputPath} ({size} bytes)");
+        }
+        else
+        {
+            throw new InvalidOperationException("Output file was not created");
+        }
+    }
+}
+```
+
+</details>
+
+
+
+
+<details>
+<summary><code>text-converter/Program.cs</code></summary>
+
+```csharp
+using System;
+using System.IO;
+using Aspose.Cells.LowCode;
+
+class Program
+{
+    static void Main()
+    {
+        // Locate input file from project output directory
+        string inputPath = Path.Combine(AppContext.BaseDirectory, "input.csv");
+        if (!File.Exists(inputPath))
+            throw new FileNotFoundException("Input file not found", inputPath);
+
+        // Define output path
+        string outputPath = Path.Combine(AppContext.BaseDirectory, "output.txt");
+
+        // Call the plugin API (string-path overload)
+        TextConverter.Process(inputPath, outputPath);
+
+        // Validate output
+        if (File.Exists(outputPath))
+        {
+            var info = new FileInfo(outputPath);
+            Console.WriteLine($"Done. Output: {outputPath} ({info.Length} bytes)");
+        }
+        else
+        {
+            throw new InvalidOperationException("Output file was not created");
+        }
+    }
+}
+```
+
+</details>
+
+
 
 
 ---
@@ -58,7 +429,7 @@ dotnet run --project examples/cells/lowcode/<example-name>
 ```
 
 Each example is a self-contained .NET project. Running it produces an output file in the project
-directory (e.g., `output.pdf`, `output.xlsx`, `output.html`).
+directory (e.g., `output.html`, `output.json`, `output.pdf`, `output.png`, `output.txt`, `output.xlsx`).
 
 ---
 
@@ -91,7 +462,7 @@ These examples are validated by the pipeline before publishing:
 | Example reviewer gate | PASS |
 | Gate verdict | `PR_DRY_RUN_READY` |
 
-Generated on: 2026-05-05 06:38 UTC
+Generated on: 2026-05-18 15:04 UTC
 
 ---
 
