@@ -26,7 +26,7 @@ here as a repeatable reference.
 | `image-converter` | `ImageConverter.Process` | `xlsx` | `png` | `dotnet run --project examples/cells/lowcode/image-converter` |
 | `json-converter` | `JsonConverter.Process` | `xlsx` | `json` | `dotnet run --project examples/cells/lowcode/json-converter` |
 | `pdf-converter` | `PdfConverter.Process` | `xlsx` | `pdf` | `dotnet run --project examples/cells/lowcode/pdf-converter` |
-| `spreadsheet-converter` | `SpreadsheetConverter.Process` | `xlsx` | `xlsx` | `dotnet run --project examples/cells/lowcode/spreadsheet-converter` |
+| `spreadsheet-converter` | `SpreadsheetConverter.Process` | `xlsx` | `csv` | `dotnet run --project examples/cells/lowcode/spreadsheet-converter` |
 | `spreadsheet-locker` | `SpreadsheetLocker.Process` | `xlsx` | `xlsx` | `dotnet run --project examples/cells/lowcode/spreadsheet-locker` |
 | `spreadsheet-merger` | `SpreadsheetMerger.Process` | `xlsx` | `xlsx` | `dotnet run --project examples/cells/lowcode/spreadsheet-merger` |
 | `spreadsheet-splitter` | `SpreadsheetSplitter.Process` | `xlsx` | `xlsx` | `dotnet run --project examples/cells/lowcode/spreadsheet-splitter` |
@@ -199,28 +199,27 @@ using System;
 using System.IO;
 using Aspose.Cells.LowCode;
 
-string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
-if (!File.Exists(inputPath))
-    throw new FileNotFoundException("Input fixture not found", inputPath);
-
-string outputPath = Path.Combine(AppContext.BaseDirectory, "output.xlsx");
-
-// Remove any previous output to ensure deterministic behavior
-if (File.Exists(outputPath))
-    File.Delete(outputPath);
-
-// Call the simplest overload of SpreadsheetConverter.Process
-SpreadsheetConverter.Process(inputPath, outputPath);
-
-// Verify that the output file was created
-if (File.Exists(outputPath))
+class Program
 {
-    var info = new FileInfo(outputPath);
-    Console.WriteLine($"Done. Output: {outputPath} ({info.Length} bytes)");
-}
-else
-{
-    throw new InvalidOperationException("Output file was not created");
+    static void Main()
+    {
+        // Locate input file from the application base directory
+        string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
+        if (!File.Exists(inputPath))
+            throw new FileNotFoundException("Input file not found", inputPath);
+
+        // Define output file path (CSV is a supported format)
+        string outputPath = Path.Combine(AppContext.BaseDirectory, "output.csv");
+
+        // Convert the spreadsheet using the simplest overload
+        SpreadsheetConverter.Process(inputPath, outputPath);
+
+        // Verify that the output file was created and report success
+        if (File.Exists(outputPath))
+            Console.WriteLine($"Done. Output: {outputPath} ({new FileInfo(outputPath).Length} bytes)");
+        else
+            throw new InvalidOperationException("Output file was not created");
+    }
 }
 ```
 
@@ -409,7 +408,7 @@ class Program
 ## Requirements
 
 - .NET 8+ (target framework: `net8.0`)
-- NuGet package: [`Aspose.Cells`](https://www.nuget.org/packages/Aspose.Cells) v26.4.0
+- NuGet package: [`Aspose.Cells`](https://www.nuget.org/packages/Aspose.Cells) v26.5.1
 
 ---
 
@@ -429,7 +428,7 @@ dotnet run --project examples/cells/lowcode/<example-name>
 ```
 
 Each example is a self-contained .NET project. Running it produces an output file in the project
-directory (e.g., `output.html`, `output.json`, `output.pdf`, `output.png`, `output.txt`, `output.xlsx`).
+directory (e.g., `output.csv`, `output.html`, `output.json`, `output.pdf`, `output.png`, `output.txt`, `output.xlsx`).
 
 ---
 
@@ -462,7 +461,7 @@ These examples are validated by the pipeline before publishing:
 | Example reviewer gate | PASS |
 | Gate verdict | `PR_DRY_RUN_READY` |
 
-Generated on: 2026-05-18 15:04 UTC
+Generated on: 2026-05-20 11:51 UTC
 
 ---
 
