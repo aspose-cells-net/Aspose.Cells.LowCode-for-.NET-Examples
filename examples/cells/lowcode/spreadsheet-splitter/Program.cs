@@ -1,33 +1,23 @@
 using System;
 using System.IO;
+using Aspose.Cells;
 using Aspose.Cells.LowCode;
 
-class Program
+namespace PluginExample
 {
-    static void Main()
+    class Program
     {
-        // Locate input file from project output directory
-        string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
-        if (!File.Exists(inputPath))
-            throw new FileNotFoundException("Input fixture not found", inputPath);
-
-        // Define output path
-        string outputPath = Path.Combine(AppContext.BaseDirectory, "output.xlsx");
-        if (File.Exists(outputPath))
-            File.Delete(outputPath);
-
-        // Call the plugin API (simplest string-path overload)
-        SpreadsheetSplitter.Process(inputPath, outputPath);
-
-        // Validate output
-        if (File.Exists(outputPath))
+        static void Main(string[] args)
         {
-            long size = new FileInfo(outputPath).Length;
-            Console.WriteLine($"Done. Output: {outputPath} ({size} bytes)");
-        }
-        else
-        {
-            throw new InvalidOperationException("Output file was not created");
+            Console.WriteLine("Example: cells-spreadsheet-splitter");
+
+            // Input file provided by pipeline fixture factory
+            string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
+
+            // Demonstrate SpreadsheetSplitter.Process
+            SpreadsheetSplitter.Process(Path.Combine(AppContext.BaseDirectory, "input.xlsx"), "output.xlsx");
+
+            Console.WriteLine("Done.");
         }
     }
 }

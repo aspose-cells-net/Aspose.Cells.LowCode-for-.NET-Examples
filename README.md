@@ -30,7 +30,7 @@ here as a repeatable reference.
 | `spreadsheet-locker` | `SpreadsheetLocker.Process` | `xlsx` | `xlsx` | `dotnet run --project examples/cells/lowcode/spreadsheet-locker` |
 | `spreadsheet-merger` | `SpreadsheetMerger.Process` | `xlsx` | `xlsx` | `dotnet run --project examples/cells/lowcode/spreadsheet-merger` |
 | `spreadsheet-splitter` | `SpreadsheetSplitter.Process` | `xlsx` | `xlsx` | `dotnet run --project examples/cells/lowcode/spreadsheet-splitter` |
-| `text-converter` | `TextConverter.Process` | `csv` | `txt` | `dotnet run --project examples/cells/lowcode/text-converter` |
+| `text-converter` | `TextConverter.Process` | `xlsx` | `txt` | `dotnet run --project examples/cells/lowcode/text-converter` |
 
 
 
@@ -47,27 +47,28 @@ here as a repeatable reference.
 ```csharp
 using System;
 using System.IO;
+using Aspose.Cells;
 using Aspose.Cells.LowCode;
 
-string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
-if (!File.Exists(inputPath))
-    throw new FileNotFoundException("Input file not found", inputPath);
-
-string outputPath = Path.Combine(AppContext.BaseDirectory, "output.html");
-
-// Convert Excel to HTML using the simplest overload
-HtmlConverter.Process(inputPath, outputPath);
-
-// Validate output
-if (File.Exists(outputPath))
+namespace PluginExample
 {
-    var info = new FileInfo(outputPath);
-    Console.WriteLine($"Conversion succeeded. Output: {outputPath} ({info.Length} bytes)");
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Example: cells-html-converter");
+
+            // Input file provided by pipeline fixture factory
+            string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
+
+            // Demonstrate HtmlConverter.Process
+            HtmlConverter.Process(Path.Combine(AppContext.BaseDirectory, "input.xlsx"), "output.html");
+
+            Console.WriteLine("Done.");
+        }
+    }
 }
-else
-{
-    throw new InvalidOperationException("Output file was not created");
-}
+
 ```
 
 </details>
@@ -81,30 +82,28 @@ else
 ```csharp
 using System;
 using System.IO;
+using Aspose.Cells;
 using Aspose.Cells.LowCode;
 
-class Program
+namespace PluginExample
 {
-    static void Main()
+    class Program
     {
-        // Locate input file from project output directory
-        string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
-        if (!File.Exists(inputPath))
-            throw new FileNotFoundException("Input file not found", inputPath);
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Example: cells-image-converter");
 
-        // Define output path
-        string outputPath = Path.Combine(AppContext.BaseDirectory, "output.png");
+            // Input file provided by pipeline fixture factory
+            string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
 
-        // Convert the workbook to an image
-        ImageConverter.Process(inputPath, outputPath);
+            // Demonstrate ImageConverter.Process
+            ImageConverter.Process(Path.Combine(AppContext.BaseDirectory, "input.xlsx"), "output.png");
 
-        // Validate output
-        if (File.Exists(outputPath))
-            Console.WriteLine($"Done. Output: {outputPath} ({new FileInfo(outputPath).Length} bytes)");
-        else
-            throw new InvalidOperationException("Output file was not created");
+            Console.WriteLine("Done.");
+        }
     }
 }
+
 ```
 
 </details>
@@ -118,35 +117,28 @@ class Program
 ```csharp
 using System;
 using System.IO;
+using Aspose.Cells;
 using Aspose.Cells.LowCode;
 
-namespace JsonConverterDemo
+namespace PluginExample
 {
-    internal class Program
+    class Program
     {
-        private static void Main(string[] args)
+        static void Main(string[] args)
         {
-            // Locate input Excel file
+            Console.WriteLine("Example: cells-json-converter");
+
+            // Input file provided by pipeline fixture factory
             string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
-            if (!File.Exists(inputPath))
-                throw new FileNotFoundException("Input file not found.", inputPath);
 
-            // Define output JSON file
-            string outputPath = Path.Combine(AppContext.BaseDirectory, "output.json");
+            // Demonstrate JsonConverter.Process
+            JsonConverter.Process(Path.Combine(AppContext.BaseDirectory, "input.xlsx"), "output.json");
 
-            // Perform conversion using the simplest overload
-            JsonConverter.Process(inputPath, outputPath);
-
-            // Validate output
-            if (!File.Exists(outputPath))
-                throw new InvalidOperationException("Output file was not created.");
-
-            // Deterministic success output
-            FileInfo info = new FileInfo(outputPath);
-            Console.WriteLine($"Conversion succeeded. Output: {outputPath} ({info.Length} bytes)");
+            Console.WriteLine("Done.");
         }
     }
 }
+
 ```
 
 </details>
@@ -160,30 +152,28 @@ namespace JsonConverterDemo
 ```csharp
 using System;
 using System.IO;
+using Aspose.Cells;
 using Aspose.Cells.LowCode;
 
-class Program
+namespace PluginExample
 {
-    static void Main()
+    class Program
     {
-        // Locate input file from the application base directory
-        string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
-        if (!File.Exists(inputPath))
-            throw new FileNotFoundException("Input file not found", inputPath);
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Example: cells-pdf-converter");
 
-        // Define output PDF path
-        string outputPath = Path.Combine(AppContext.BaseDirectory, "output.pdf");
+            // Input file provided by pipeline fixture factory
+            string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
 
-        // Convert the Excel file to PDF using the simplest overload
-        PdfConverter.Process(inputPath, outputPath);
+            // Demonstrate PdfConverter.Process
+            PdfConverter.Process(Path.Combine(AppContext.BaseDirectory, "input.xlsx"), "output.pdf");
 
-        // Verify that the output file was created
-        if (File.Exists(outputPath))
-            Console.WriteLine($"Done. Output: {outputPath} ({new FileInfo(outputPath).Length} bytes)");
-        else
-            throw new InvalidOperationException("Output file was not created");
+            Console.WriteLine("Done.");
+        }
     }
 }
+
 ```
 
 </details>
@@ -197,30 +187,28 @@ class Program
 ```csharp
 using System;
 using System.IO;
+using Aspose.Cells;
 using Aspose.Cells.LowCode;
 
-class Program
+namespace PluginExample
 {
-    static void Main()
+    class Program
     {
-        // Locate input file from the application base directory
-        string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
-        if (!File.Exists(inputPath))
-            throw new FileNotFoundException("Input file not found", inputPath);
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Example: cells-spreadsheet-converter");
 
-        // Define output file path (CSV is a supported format)
-        string outputPath = Path.Combine(AppContext.BaseDirectory, "output.csv");
+            // Input file provided by pipeline fixture factory
+            string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
 
-        // Convert the spreadsheet using the simplest overload
-        SpreadsheetConverter.Process(inputPath, outputPath);
+            // Demonstrate SpreadsheetConverter.Process
+            SpreadsheetConverter.Process(Path.Combine(AppContext.BaseDirectory, "input.xlsx"), "output.csv");
 
-        // Verify that the output file was created and report success
-        if (File.Exists(outputPath))
-            Console.WriteLine($"Done. Output: {outputPath} ({new FileInfo(outputPath).Length} bytes)");
-        else
-            throw new InvalidOperationException("Output file was not created");
+            Console.WriteLine("Done.");
+        }
     }
 }
+
 ```
 
 </details>
@@ -234,35 +222,28 @@ class Program
 ```csharp
 using System;
 using System.IO;
+using Aspose.Cells;
 using Aspose.Cells.LowCode;
 
-class Program
+namespace PluginExample
 {
-    static void Main()
+    class Program
     {
-        // Locate input file from the project output directory
-        string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
-        if (!File.Exists(inputPath))
-            throw new FileNotFoundException("Input fixture not found", inputPath);
-
-        // Define output path
-        string outputPath = Path.Combine(AppContext.BaseDirectory, "output.xlsx");
-
-        // Call the simplest overload of SpreadsheetLocker.Process
-        SpreadsheetLocker.Process(inputPath, outputPath, "", "");
-
-        // Validate output
-        if (File.Exists(outputPath))
+        static void Main(string[] args)
         {
-            var info = new FileInfo(outputPath);
-            Console.WriteLine($"Done. Output: {outputPath} ({info.Length} bytes)");
-        }
-        else
-        {
-            throw new InvalidOperationException("Output file was not created");
+            Console.WriteLine("Example: cells-spreadsheet-locker");
+
+            // Input file provided by pipeline fixture factory
+            string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
+
+            // Demonstrate SpreadsheetLocker.Process
+            SpreadsheetLocker.Process(Path.Combine(AppContext.BaseDirectory, "input.xlsx"), "output.xlsx", "test-password", "test-password");
+
+            Console.WriteLine("Done.");
         }
     }
 }
+
 ```
 
 </details>
@@ -276,40 +257,29 @@ class Program
 ```csharp
 using System;
 using System.IO;
-using Aspose.Cells;
 using Aspose.Cells.LowCode;
 
-class Program
+namespace PluginExample
 {
-    static void Main()
+    class Program
     {
-        // Prepare a simple input workbook if it does not already exist
-        string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
-        if (!File.Exists(inputPath))
+        static void Main(string[] args)
         {
-            var workbook = new Workbook();
-            workbook.Worksheets[0].Name = "Sheet1";
-            workbook.Save(inputPath);
+            Console.WriteLine("Example: cells-spreadsheet-merger");
+
+            string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
+            string input1Path = Path.Combine(AppContext.BaseDirectory, "input1.xlsx");
+            string input2Path = Path.Combine(AppContext.BaseDirectory, "input2.xlsx");
+            File.Copy(inputPath, input1Path, overwrite: true);
+            File.Copy(inputPath, input2Path, overwrite: true);
+
+            SpreadsheetMerger.Process(new string[] { input1Path, input2Path }, "output.xlsx");
+
+            Console.WriteLine("Done.");
         }
-
-        // Validate input file exists
-        if (!File.Exists(inputPath))
-            throw new FileNotFoundException("Input file not found.", inputPath);
-
-        // Define output file path
-        string outputPath = Path.Combine(AppContext.BaseDirectory, "output.xlsx");
-
-        // Use the overload of SpreadsheetMerger.Process that accepts an array of template files
-        SpreadsheetMerger.Process(new[] { inputPath }, outputPath);
-
-        // Validate output file was created
-        if (!File.Exists(outputPath))
-            throw new InvalidOperationException("Output file was not created by SpreadsheetMerger.Process.");
-
-        // Deterministic success output
-        Console.WriteLine($"SpreadsheetMerger.Process succeeded: {outputPath} ({new FileInfo(outputPath).Length} bytes)");
     }
 }
+
 ```
 
 </details>
@@ -323,37 +293,28 @@ class Program
 ```csharp
 using System;
 using System.IO;
+using Aspose.Cells;
 using Aspose.Cells.LowCode;
 
-class Program
+namespace PluginExample
 {
-    static void Main()
+    class Program
     {
-        // Locate input file from project output directory
-        string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
-        if (!File.Exists(inputPath))
-            throw new FileNotFoundException("Input fixture not found", inputPath);
-
-        // Define output path
-        string outputPath = Path.Combine(AppContext.BaseDirectory, "output.xlsx");
-        if (File.Exists(outputPath))
-            File.Delete(outputPath);
-
-        // Call the plugin API (simplest string-path overload)
-        SpreadsheetSplitter.Process(inputPath, outputPath);
-
-        // Validate output
-        if (File.Exists(outputPath))
+        static void Main(string[] args)
         {
-            long size = new FileInfo(outputPath).Length;
-            Console.WriteLine($"Done. Output: {outputPath} ({size} bytes)");
-        }
-        else
-        {
-            throw new InvalidOperationException("Output file was not created");
+            Console.WriteLine("Example: cells-spreadsheet-splitter");
+
+            // Input file provided by pipeline fixture factory
+            string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
+
+            // Demonstrate SpreadsheetSplitter.Process
+            SpreadsheetSplitter.Process(Path.Combine(AppContext.BaseDirectory, "input.xlsx"), "output.xlsx");
+
+            Console.WriteLine("Done.");
         }
     }
 }
+
 ```
 
 </details>
@@ -367,35 +328,28 @@ class Program
 ```csharp
 using System;
 using System.IO;
+using Aspose.Cells;
 using Aspose.Cells.LowCode;
 
-class Program
+namespace PluginExample
 {
-    static void Main()
+    class Program
     {
-        // Locate input file from project output directory
-        string inputPath = Path.Combine(AppContext.BaseDirectory, "input.csv");
-        if (!File.Exists(inputPath))
-            throw new FileNotFoundException("Input file not found", inputPath);
-
-        // Define output path
-        string outputPath = Path.Combine(AppContext.BaseDirectory, "output.txt");
-
-        // Call the plugin API (string-path overload)
-        TextConverter.Process(inputPath, outputPath);
-
-        // Validate output
-        if (File.Exists(outputPath))
+        static void Main(string[] args)
         {
-            var info = new FileInfo(outputPath);
-            Console.WriteLine($"Done. Output: {outputPath} ({info.Length} bytes)");
-        }
-        else
-        {
-            throw new InvalidOperationException("Output file was not created");
+            Console.WriteLine("Example: cells-text-converter");
+
+            // Input file provided by pipeline fixture factory
+            string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
+
+            // Demonstrate TextConverter.Process
+            TextConverter.Process(Path.Combine(AppContext.BaseDirectory, "input.xlsx"), "output.txt");
+
+            Console.WriteLine("Done.");
         }
     }
 }
+
 ```
 
 </details>
@@ -461,7 +415,7 @@ These examples are validated by the pipeline before publishing:
 | Example reviewer gate | PASS |
 | Gate verdict | `PR_DRY_RUN_READY` |
 
-Generated on: 2026-05-20 11:51 UTC
+Generated on: 2026-06-01 16:02 UTC
 
 ---
 
