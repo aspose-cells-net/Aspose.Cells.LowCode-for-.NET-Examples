@@ -3,6 +3,6 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="Aspose.Cells" Version="26.5.1" />
+    <PackageVersion Include="Aspose.Cells" Version="25.5.0" />
   </ItemGroup>
 </Project>

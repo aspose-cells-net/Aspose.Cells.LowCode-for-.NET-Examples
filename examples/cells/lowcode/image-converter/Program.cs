@@ -1,26 +1,23 @@
 using System;
 using System.IO;
+using Aspose.Cells;
 using Aspose.Cells.LowCode;
 
-class Program
+namespace PluginExample
 {
-    static void Main()
+    class Program
     {
-        // Locate input file from project output directory
-        string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
-        if (!File.Exists(inputPath))
-            throw new FileNotFoundException("Input file not found", inputPath);
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Example: cells-image-converter");
 
-        // Define output path
-        string outputPath = Path.Combine(AppContext.BaseDirectory, "output.png");
+            // Input file provided by pipeline fixture factory
+            string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
 
-        // Convert the workbook to an image
-        ImageConverter.Process(inputPath, outputPath);
+            // Demonstrate ImageConverter.Process
+            ImageConverter.Process(Path.Combine(AppContext.BaseDirectory, "input.xlsx"), "output.png");
 
-        // Validate output
-        if (File.Exists(outputPath))
-            Console.WriteLine($"Done. Output: {outputPath} ({new FileInfo(outputPath).Length} bytes)");
-        else
-            throw new InvalidOperationException("Output file was not created");
+            Console.WriteLine("Done.");
+        }
     }
 }

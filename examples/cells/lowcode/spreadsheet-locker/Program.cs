@@ -1,31 +1,23 @@
 using System;
 using System.IO;
+using Aspose.Cells;
 using Aspose.Cells.LowCode;
 
-class Program
+namespace PluginExample
 {
-    static void Main()
+    class Program
     {
-        // Locate input file from the project output directory
-        string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
-        if (!File.Exists(inputPath))
-            throw new FileNotFoundException("Input fixture not found", inputPath);
-
-        // Define output path
-        string outputPath = Path.Combine(AppContext.BaseDirectory, "output.xlsx");
-
-        // Call the simplest overload of SpreadsheetLocker.Process
-        SpreadsheetLocker.Process(inputPath, outputPath, "", "");
-
-        // Validate output
-        if (File.Exists(outputPath))
+        static void Main(string[] args)
         {
-            var info = new FileInfo(outputPath);
-            Console.WriteLine($"Done. Output: {outputPath} ({info.Length} bytes)");
-        }
-        else
-        {
-            throw new InvalidOperationException("Output file was not created");
+            Console.WriteLine("Example: cells-spreadsheet-locker");
+
+            // Input file provided by pipeline fixture factory
+            string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
+
+            // Demonstrate SpreadsheetLocker.Process
+            SpreadsheetLocker.Process(Path.Combine(AppContext.BaseDirectory, "input.xlsx"), "output.xlsx", "test-password", "test-password");
+
+            Console.WriteLine("Done.");
         }
     }
 }

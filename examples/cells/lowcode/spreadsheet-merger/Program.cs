@@ -1,36 +1,24 @@
 using System;
 using System.IO;
-using Aspose.Cells;
 using Aspose.Cells.LowCode;
 
-class Program
+namespace PluginExample
 {
-    static void Main()
+    class Program
     {
-        // Prepare a simple input workbook if it does not already exist
-        string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
-        if (!File.Exists(inputPath))
+        static void Main(string[] args)
         {
-            var workbook = new Workbook();
-            workbook.Worksheets[0].Name = "Sheet1";
-            workbook.Save(inputPath);
+            Console.WriteLine("Example: cells-spreadsheet-merger");
+
+            string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
+            string input1Path = Path.Combine(AppContext.BaseDirectory, "input1.xlsx");
+            string input2Path = Path.Combine(AppContext.BaseDirectory, "input2.xlsx");
+            File.Copy(inputPath, input1Path, overwrite: true);
+            File.Copy(inputPath, input2Path, overwrite: true);
+
+            SpreadsheetMerger.Process(new string[] { input1Path, input2Path }, "output.xlsx");
+
+            Console.WriteLine("Done.");
         }
-
-        // Validate input file exists
-        if (!File.Exists(inputPath))
-            throw new FileNotFoundException("Input file not found.", inputPath);
-
-        // Define output file path
-        string outputPath = Path.Combine(AppContext.BaseDirectory, "output.xlsx");
-
-        // Use the overload of SpreadsheetMerger.Process that accepts an array of template files
-        SpreadsheetMerger.Process(new[] { inputPath }, outputPath);
-
-        // Validate output file was created
-        if (!File.Exists(outputPath))
-            throw new InvalidOperationException("Output file was not created by SpreadsheetMerger.Process.");
-
-        // Deterministic success output
-        Console.WriteLine($"SpreadsheetMerger.Process succeeded: {outputPath} ({new FileInfo(outputPath).Length} bytes)");
     }
 }

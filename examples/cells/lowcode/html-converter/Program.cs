@@ -1,23 +1,23 @@
 using System;
 using System.IO;
+using Aspose.Cells;
 using Aspose.Cells.LowCode;
 
-string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
-if (!File.Exists(inputPath))
-    throw new FileNotFoundException("Input file not found", inputPath);
-
-string outputPath = Path.Combine(AppContext.BaseDirectory, "output.html");
-
-// Convert Excel to HTML using the simplest overload
-HtmlConverter.Process(inputPath, outputPath);
-
-// Validate output
-if (File.Exists(outputPath))
+namespace PluginExample
 {
-    var info = new FileInfo(outputPath);
-    Console.WriteLine($"Conversion succeeded. Output: {outputPath} ({info.Length} bytes)");
-}
-else
-{
-    throw new InvalidOperationException("Output file was not created");
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Example: cells-html-converter");
+
+            // Input file provided by pipeline fixture factory
+            string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
+
+            // Demonstrate HtmlConverter.Process
+            HtmlConverter.Process(Path.Combine(AppContext.BaseDirectory, "input.xlsx"), "output.html");
+
+            Console.WriteLine("Done.");
+        }
+    }
 }

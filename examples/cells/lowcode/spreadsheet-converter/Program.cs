@@ -1,26 +1,23 @@
 using System;
 using System.IO;
+using Aspose.Cells;
 using Aspose.Cells.LowCode;
 
-class Program
+namespace PluginExample
 {
-    static void Main()
+    class Program
     {
-        // Locate input file from the application base directory
-        string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
-        if (!File.Exists(inputPath))
-            throw new FileNotFoundException("Input file not found", inputPath);
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Example: cells-spreadsheet-converter");
 
-        // Define output file path (CSV is a supported format)
-        string outputPath = Path.Combine(AppContext.BaseDirectory, "output.csv");
+            // Input file provided by pipeline fixture factory
+            string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
 
-        // Convert the spreadsheet using the simplest overload
-        SpreadsheetConverter.Process(inputPath, outputPath);
+            // Demonstrate SpreadsheetConverter.Process
+            SpreadsheetConverter.Process(Path.Combine(AppContext.BaseDirectory, "input.xlsx"), "output.csv");
 
-        // Verify that the output file was created and report success
-        if (File.Exists(outputPath))
-            Console.WriteLine($"Done. Output: {outputPath} ({new FileInfo(outputPath).Length} bytes)");
-        else
-            throw new InvalidOperationException("Output file was not created");
+            Console.WriteLine("Done.");
+        }
     }
 }

@@ -1,31 +1,23 @@
 using System;
 using System.IO;
+using Aspose.Cells;
 using Aspose.Cells.LowCode;
 
-class Program
+namespace PluginExample
 {
-    static void Main()
+    class Program
     {
-        // Locate input file from project output directory
-        string inputPath = Path.Combine(AppContext.BaseDirectory, "input.csv");
-        if (!File.Exists(inputPath))
-            throw new FileNotFoundException("Input file not found", inputPath);
-
-        // Define output path
-        string outputPath = Path.Combine(AppContext.BaseDirectory, "output.txt");
-
-        // Call the plugin API (string-path overload)
-        TextConverter.Process(inputPath, outputPath);
-
-        // Validate output
-        if (File.Exists(outputPath))
+        static void Main(string[] args)
         {
-            var info = new FileInfo(outputPath);
-            Console.WriteLine($"Done. Output: {outputPath} ({info.Length} bytes)");
-        }
-        else
-        {
-            throw new InvalidOperationException("Output file was not created");
+            Console.WriteLine("Example: cells-text-converter");
+
+            // Input file provided by pipeline fixture factory
+            string inputPath = Path.Combine(AppContext.BaseDirectory, "input.xlsx");
+
+            // Demonstrate TextConverter.Process
+            TextConverter.Process(Path.Combine(AppContext.BaseDirectory, "input.xlsx"), "output.txt");
+
+            Console.WriteLine("Done.");
         }
     }
 }
